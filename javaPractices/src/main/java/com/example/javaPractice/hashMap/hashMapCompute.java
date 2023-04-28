@@ -15,8 +15,8 @@ public class hashMapCompute {
         this.hashMap();
         this.computeIfAbsent();
         List<BulkProductOffer> bulkProductOffers = new ArrayList<BulkProductOffer>();
-        Map<String, Map<String, List<BulkProductOffer>>> groupedRequestMap = createGroupedRequestMap(bulkProductOffers);
-        System.out.println(groupedRequestMap);
+        Map<String, Map<String, List<BulkProductOffer>>> groupedMap = createGroupedMap(bulkProductOffers);
+        System.out.println(groupedMap);
     }
 
     private void computeIfAbsent(){
@@ -33,7 +33,7 @@ public class hashMapCompute {
         System.out.println(newValue); // Output: 3
     }
 
-    private static Map<String, Map<String, List<BulkProductOffer>>> createGroupedRequestMap(List<BulkProductOffer> bulkProductOffers) {
+    private static Map<String, Map<String, List<BulkProductOffer>>> createGroupedMap(List<BulkProductOffer> bulkProductOffers) {
         Map<String, List<BulkProductOffer>> map = new HashMap<>();
         Map<String, Map<String, List<BulkProductOffer>>> groupedMap = new HashMap<>();
         for (BulkProductOffer item : bulkProductOffers) {
