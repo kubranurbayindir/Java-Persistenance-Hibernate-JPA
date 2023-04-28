@@ -34,8 +34,8 @@ public class hashMapCompute {
     }
 
     private static Map<String, Map<String, List<BulkProductOffer>>> createGroupedRequestMap(List<BulkProductOffer> bulkProductOffers) {
-        Map<String, List<BulkProductOffer>> groupedMap = new HashMap<>();
-        Map<String, Map<String, List<BulkProductOffer>>> groupedApiRequestMap = new HashMap<>();
+        Map<String, List<BulkProductOffer>> map = new HashMap<>();
+        Map<String, Map<String, List<BulkProductOffer>>> groupedMap = new HashMap<>();
         for (BulkProductOffer item : bulkProductOffers) {
             String key = "definitionProduct"; //you can generate this item for present map.
             /* computeIfAbsent : The computeIfAbsent method first checks
@@ -43,12 +43,12 @@ public class hashMapCompute {
             then the associated value is returned. If the key is not present,
             then the mapping function is called with the key as its argument to compute the new value.
             The new value is then associated with the key in the map and returned. */
-            groupedMap.computeIfAbsent(key, k -> new ArrayList<>()).add(item);
+            map.computeIfAbsent(key, k -> new ArrayList<>()).add(item);
 
-            Map<String, List<BulkProductOffer>> defLevelMap = groupedApiRequestMap.computeIfAbsent(item.getDefinitionLevel(), k -> new HashMap<>());
-            defLevelMap.put(key, groupedMap.get(key));
+            Map<String, List<BulkProductOffer>> productMap = groupedMap.computeIfAbsent(item.getProductName(), k -> new HashMap<>());
+            productMap.put(key, map.get(key));
         }
-        return groupedApiRequestMap;
+        return map;
     }
 
     private void hashMap() {
